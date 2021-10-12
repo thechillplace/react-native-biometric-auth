@@ -2,10 +2,12 @@
 
 a wrapper biometric authentication
 
+We are developing...
+
 ## Installation
 
 ```sh
-npm install react-native-biometric-auth
+npm install react-native-biometric-authenticate
 ```
 
 ## Usage

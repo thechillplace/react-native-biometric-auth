@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import {
   hasBiometricCapability,
   authenticate,
@@ -9,21 +9,17 @@ import {
 export default function App() {
   const [result, setResult] = React.useState<string | undefined>();
 
-  React.useEffect(() => {
-    _checkHasBiometricCapability();
-  }, []);
-
   const _checkHasBiometricCapability = async () => {
     try {
       const r = await hasBiometricCapability();
-      setResult(`${r}`);
       if (r) {
-        await authenticate({
+        const res = await authenticate({
           title: 'Biometric Authentication',
           subtitle: 'subtitle',
           description: 'description',
           allowDeviceCredential: true,
         });
+        setResult(`${res}`);
       }
     } catch (e) {
       console.log(e);
@@ -33,6 +29,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <Button onPress={_checkHasBiometricCapability} title="Login" />
     </View>
   );
 }

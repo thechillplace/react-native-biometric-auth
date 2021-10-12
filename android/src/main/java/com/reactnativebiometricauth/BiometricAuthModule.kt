@@ -59,7 +59,7 @@ class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextB
     }
 
     override fun onBiometricAuthenticationSuccess(result: BiometricPrompt.AuthenticationResult) {
-        currentPromise.resolve(result.toString())
+        currentPromise.resolve(true)
     }
 
     override fun onBiometricAuthenticationError(errorCode: Int, errorMessage: String) {
