@@ -8,7 +8,7 @@ target 'BiometricAuthExample' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'react-native-biometric-auth', :path => '../..'
+  pod 'react-native-biometric-authenticate', :path => '../..'
 
   # Enables Flipper.
   #
