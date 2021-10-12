@@ -1,14 +1,23 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-biometric-auth';
+import { hasBiometricCapability } from 'react-native-biometric-auth';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<string | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    _checkHasBiometricCapability();
   }, []);
+
+  const _checkHasBiometricCapability = async () => {
+    try {
+      const r = await hasBiometricCapability();
+      setResult(`${r}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <View style={styles.container}>
