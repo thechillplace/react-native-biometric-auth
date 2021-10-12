@@ -1,4 +1,4 @@
-# react-native-biometric-auth
+# react-native-biometric-authenticate
 
 a wrapper biometric authentication
 
