@@ -11,11 +11,11 @@ npm install react-native-biometric-auth
 ## Usage
 
 ```js
-import { multiply } from "react-native-biometric-auth";
+import { hasBiometricCapability } from "react-native-biometric-auth";
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await hasBiometricCapability();
 ```
 
 ## Contributing
