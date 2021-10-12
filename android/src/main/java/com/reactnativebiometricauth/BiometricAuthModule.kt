@@ -1,5 +1,6 @@
 package com.reactnativebiometricauth
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -53,7 +54,7 @@ class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextB
                 activity = fragmentActivity as AppCompatActivity,
                 listener = this,
                 cryptoObject = null,
-                allowDeviceCredential = option.getBoolean("allowDeviceCredential")
+                allowDeviceCredential = option.getBoolean("allowDeviceCredential") ?: false
             )
         })
     }
@@ -67,7 +68,7 @@ class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextB
     }
 
     override fun onBiometricAuthenticationFail() {
-        currentPromise.reject("Unkown")
+        currentPromise.reject("Unknow")
     }
 
 

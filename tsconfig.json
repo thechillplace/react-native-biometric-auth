@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-biometric-auth": ["./src/index"]
+      "react-native-biometric-authenticate": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

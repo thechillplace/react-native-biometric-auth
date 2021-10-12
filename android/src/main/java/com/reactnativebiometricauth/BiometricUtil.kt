@@ -3,6 +3,8 @@ package com.reactnativebiometricauth
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 
@@ -17,7 +19,7 @@ object BiometricUtil {
     */
     fun hasBiometricCapability(context: Context): Int {
         val biometricManager = BiometricManager.from(context)
-        return biometricManager.canAuthenticate()
+        return biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
     }
 
     private fun setBiometricPromptInfo(
@@ -32,7 +34,7 @@ object BiometricUtil {
             .setDescription(description)
         builder.apply {
             if (allowDeviceCredential) {
-                setDeviceCredentialAllowed(true)
+                setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
             } else {
                 setNegativeButtonText("Cancel")
             }

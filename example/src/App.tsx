@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import {
   hasBiometricCapability,
   authenticate,
-} from 'react-native-biometric-auth';
+} from 'react-native-biometric-authenticate';
 
 export default function App() {
   const [result, setResult] = React.useState<string | undefined>();
@@ -14,10 +14,10 @@ export default function App() {
       const r = await hasBiometricCapability();
       if (r) {
         const res = await authenticate({
-          title: 'Biometric Authentication',
+          title: 'Đăng nhập',
           subtitle: 'subtitle',
           description: 'description',
-          allowDeviceCredential: true,
+          allowDeviceCredential: false,
         });
         setResult(`${res}`);
       }
