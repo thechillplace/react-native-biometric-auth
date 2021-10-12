@@ -1,0 +1,6 @@
+rootProject.name = 'BiometricAuthExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':reactnativebiometricauth'
+project(':reactnativebiometricauth').projectDir = new File(rootProject.projectDir, '../../android')
