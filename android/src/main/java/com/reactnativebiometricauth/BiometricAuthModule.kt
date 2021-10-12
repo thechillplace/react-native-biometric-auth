@@ -1,42 +1,74 @@
 package com.reactnativebiometricauth
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import androidx.biometric.BiometricPrompt
+import com.facebook.react.bridge.*
+import androidx.fragment.app.FragmentActivity
+import com.facebook.react.bridge.UiThreadUtil
 
-class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+
+class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext),
+    BiometricAuthListener {
+
+    companion object {
+        lateinit var currentPromise: Promise;
+    }
 
     override fun getName(): String {
       return "BiometricAuth"
-    }
-
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-
-        promise.resolve(a * b)
-
     }
 
     // Check has biometric function
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
     fun hasBiometricCapability(promise: Promise) {
-        val result = BiometricUtil.hasBiometricCapability(reactApplicationContext)
-        if (result == BiometricManager.BIOMETRIC_SUCCESS) {
-            promise.resolve(true)
-        } else if (result == BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE) {
-            promise.reject(result.toString(), "BIOMETRIC_ERROR_HW_UNAVAILABLE")
-        } else if (result == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
-            promise.reject(result.toString(), "BIOMETRIC_ERROR_NONE_ENROLLED")
-        } else if (result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
-            promise.reject(result.toString(), "BIOMETRIC_ERROR_NO_HARDWARE")
+        when (val result = BiometricUtil.hasBiometricCapability(reactApplicationContext)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                promise.resolve(true)
+            }
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+                promise.reject(result.toString(), "BIOMETRIC_ERROR_HW_UNAVAILABLE")
+            }
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                promise.reject(result.toString(), "BIOMETRIC_ERROR_NONE_ENROLLED")
+            }
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
+                promise.reject(result.toString(), "BIOMETRIC_ERROR_NO_HARDWARE")
+            }
         }
     }
 
+    // authenticate biometric function
+    // See https://reactnative.dev/docs/native-modules-android
+    @ReactMethod
+    fun authenticate(option: ReadableMap, promise: Promise) {
+        UiThreadUtil.runOnUiThread( Runnable() {
+            currentPromise = promise
+            val fragmentActivity = currentActivity as FragmentActivity?
+            BiometricUtil.showBiometricPrompt(
+                title = option.getString("title") ?: "Biometric Authentication",
+                subtitle = option.getString("subtitle") ?: "Enter biometric credentials to proceed.",
+                description = option.getString("description") ?: "Input your Fingerprint or FaceID to ensure it's you!",
+                activity = fragmentActivity as AppCompatActivity,
+                listener = this,
+                cryptoObject = null,
+                allowDeviceCredential = option.getBoolean("allowDeviceCredential")
+            )
+        })
+    }
+
+    override fun onBiometricAuthenticationSuccess(result: BiometricPrompt.AuthenticationResult) {
+        currentPromise.resolve(result.toString())
+    }
+
+    override fun onBiometricAuthenticationError(errorCode: Int, errorMessage: String) {
+        currentPromise.reject(errorCode.toString(), errorMessage)
+    }
+
+    override fun onBiometricAuthenticationFail() {
+        currentPromise.reject("Unkown")
+    }
 
 
 }

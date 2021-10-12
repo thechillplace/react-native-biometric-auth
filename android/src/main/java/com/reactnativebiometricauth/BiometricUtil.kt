@@ -1,7 +1,6 @@
 package com.reactnativebiometricauth
 
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -55,7 +54,7 @@ object BiometricUtil {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                Log.w(this.javaClass.simpleName, "Authentication failed for an unknown reason")
+                listener.onBiometricAuthenticationFail()
             }
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
@@ -81,7 +80,7 @@ object BiometricUtil {
         val biometricPrompt = initBiometricPrompt(activity, listener)
 
         biometricPrompt.apply {
-            if (cryptoObject == null)
+            if (cryptoObject == null) authenticate(promptInfo)
             else authenticate(promptInfo, cryptoObject)
         }
     }

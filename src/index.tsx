@@ -17,10 +17,10 @@ const BiometricAuth = NativeModules.BiometricAuth
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return BiometricAuth.multiply(a, b);
+export function hasBiometricCapability(): Promise<any> {
+  return BiometricAuth.hasBiometricCapability();
 }
 
-export function hasBiometricCapability(): Promise<number> {
-  return BiometricAuth.hasBiometricCapability();
+export function authenticate(option: object): Promise<any> {
+  return BiometricAuth.authenticate(option);
 }
