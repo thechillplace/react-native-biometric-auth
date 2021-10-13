@@ -15,14 +15,14 @@ export default function App() {
       if (r) {
         const res = await authenticate({
           title: 'Đăng nhập',
-          subtitle: 'subtitle',
+          subtitle: 'Đăng nhập bằng sinh trắc học',
           description: 'description',
-          allowDeviceCredential: false,
+          allowDeviceCredential: true,
         });
         setResult(`${res}`);
       }
     } catch (e) {
-      console.log(e);
+      setResult(``);
     }
   };
 

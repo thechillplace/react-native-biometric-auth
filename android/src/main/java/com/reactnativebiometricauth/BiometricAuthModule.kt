@@ -1,6 +1,5 @@
 package com.reactnativebiometricauth
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -46,12 +45,11 @@ class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextB
     fun authenticate(option: ReadableMap, promise: Promise) {
         UiThreadUtil.runOnUiThread( Runnable() {
             currentPromise = promise
-            val fragmentActivity = currentActivity as FragmentActivity?
             BiometricUtil.showBiometricPrompt(
                 title = option.getString("title") ?: "Biometric Authentication",
                 subtitle = option.getString("subtitle") ?: "Enter biometric credentials to proceed.",
                 description = option.getString("description") ?: "Input your Fingerprint or FaceID to ensure it's you!",
-                activity = fragmentActivity as AppCompatActivity,
+                activity = currentActivity as AppCompatActivity,
                 listener = this,
                 cryptoObject = null,
                 allowDeviceCredential = option.getBoolean("allowDeviceCredential") ?: false
@@ -66,10 +64,5 @@ class BiometricAuthModule(reactContext: ReactApplicationContext) : ReactContextB
     override fun onBiometricAuthenticationError(errorCode: Int, errorMessage: String) {
         currentPromise.reject(errorCode.toString(), errorMessage)
     }
-
-    override fun onBiometricAuthenticationFail() {
-        currentPromise.reject("Unknow")
-    }
-
 
 }

@@ -36,7 +36,7 @@ object BiometricUtil {
             if (allowDeviceCredential) {
                 setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
             } else {
-                setNegativeButtonText("Cancel")
+                setNegativeButtonText("Hủy bỏ")
             }
         }
         return builder.build()
@@ -56,7 +56,6 @@ object BiometricUtil {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                listener.onBiometricAuthenticationFail()
             }
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
