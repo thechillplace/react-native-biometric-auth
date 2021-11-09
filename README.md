@@ -13,11 +13,18 @@ npm install react-native-biometric-authenticate
 ## Usage
 
 ```js
-import { hasBiometricCapability } from "react-native-biometric-authenticate";
+import { hasBiometricCapability, authenticate } from "react-native-biometric-authenticate";
 
 // ...
 
 const result = await hasBiometricCapability();
+
+const res = await authenticate({
+  title: 'Login',
+  subtitle: 'Login by Biometric feature',
+  description: 'description',
+  allowDeviceCredential: true,
+});
 ```
 
 ## Contributing
