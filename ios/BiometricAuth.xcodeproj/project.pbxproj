@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* BiometricAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* BiometricAuth.m */; };
-		F4FF95D7245B92E800C19C63 /*  BiometricAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  BiometricAuth.swift */; };
-
+		D8AC3FAD2736C75500AA7A74 /* RNBiometricAuthBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3FAC2736C75500AA7A74 /* RNBiometricAuthBridge.m */; };
+		D8AC3FAF2736C76C00AA7A74 /* RNBiometricAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3FAE2736C76C00AA7A74 /* RNBiometricAuth.swift */; };
+		F4FF95D7245B92E800C19C63 /* BiometricAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* BiometricAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,11 +26,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libBiometricAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBiometricAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
 		B3E7B5891CC2AC0600A0062D /* BiometricAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiometricAuth.m; sourceTree = "<group>"; };
+		D8AC3FAC2736C75500AA7A74 /* RNBiometricAuthBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNBiometricAuthBridge.m; sourceTree = "<group>"; };
+		D8AC3FAE2736C76C00AA7A74 /* RNBiometricAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNBiometricAuth.swift; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* BiometricAuth-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BiometricAuth-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* BiometricAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuth.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +55,21 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
+				D8AC3FAB2736C72700AA7A74 /* RNBiometricAuth */,
 				F4FF95D6245B92E800C19C63 /* BiometricAuth.swift */,
 				B3E7B5891CC2AC0600A0062D /* BiometricAuth.m */,
 				F4FF95D5245B92E700C19C63 /* BiometricAuth-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		D8AC3FAB2736C72700AA7A74 /* RNBiometricAuth */ = {
+			isa = PBXGroup;
+			children = (
+				D8AC3FAC2736C75500AA7A74 /* RNBiometricAuthBridge.m */,
+				D8AC3FAE2736C76C00AA7A74 /* RNBiometricAuth.swift */,
+			);
+			path = RNBiometricAuth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,10 +129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				F4FF95D7245B92E800C19C63 /* BiometricAuth.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* BiometricAuth.m in Sources */,
-
+				D8AC3FAF2736C76C00AA7A74 /* RNBiometricAuth.swift in Sources */,
+				D8AC3FAD2736C75500AA7A74 /* RNBiometricAuthBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,11 +244,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BiometricAuth;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "BiometricAuth-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
@@ -259,10 +263,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BiometricAuth;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "BiometricAuth-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};
